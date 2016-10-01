@@ -8,12 +8,14 @@ import newer from 'gulp-newer';
 import debug from 'gulp-debug';
 import autoprefixer from 'gulp-autoprefixer';
 import remember from 'gulp-remember';
+import browserSync from 'browser-sync';
 import del from 'del';
 import path from 'path';
 import webpackStream from 'webpack-stream';
 import named from 'vinyl-named';
 
 const webpack = webpackStream.webpack;
+const browserSyncer = browserSync.create();
 let isDevelopment = false;
 
 
@@ -85,17 +87,29 @@ gulp.task('watch', function(){
 	gulp.watch('dev/styles/**/*.css', gulp.series('styles')).on('unlink',function(filepath){
 		remember.forget('styles',path.resolve(filepath));
 	});
-	gulp.watch('dev/assets/**/*.*', gulp.series('assets'))	
+	gulp.watch('dev/assets/**/*.*', gulp.series('assets'));
+	gulp.watch('dev/**/*.html', gulp.series('assets'));
 })
 
-gulp.task('build', gulp.series('clean', gulp.parallel('styles','assets','webpack')));
+gulp.task('build', gulp.series(
+	'clean', 
+	gulp.parallel('styles','assets','webpack')
+));
+
+
+gulp.task('server', function (){
+	browserSyncer.init({
+		server:'./'
+	});
+	browserSyncer.watch(['dist/**/*.*','index.html']).on('change',browserSyncer.reload);
+});
 
 gulp.task('dev', 
 	gulp.series(
-		'clean',
 		function(callback){isDevelopment=true;callback();},
-		gulp.parallel('styles','assets','webpack')
+		'build',
+		gulp.parallel('watch','server')
 	)
 );
 
-gulp.task('default', gulp.series('build','watch'));
+gulp.task('default', gulp.series('dev'));

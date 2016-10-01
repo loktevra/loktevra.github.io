@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "gulp": "./node_modules/.bin/gulp",
-    "build":"npm run gulp build",
-    "dev":"npm run gulp dev"
+    "build": "npm run gulp build",
+    "dev": "npm run gulp dev",
+    "clean": "npm run gulp clean"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.14.0",
+    "browser-sync": "^2.17.0",
     "del": "^2.2.2",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-autoprefixer": "^3.1.1",
