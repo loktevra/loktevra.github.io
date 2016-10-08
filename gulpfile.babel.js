@@ -1,5 +1,4 @@
 import gulp from 'gulp';
-import plumber from 'gulp-plumber';
 import notify from 'gulp-notify';
 import concat from 'gulp-concat';
 import sourcemaps from 'gulp-sourcemaps';
@@ -9,6 +8,7 @@ import debug from 'gulp-debug';
 import autoprefixer from 'gulp-autoprefixer';
 import remember from 'gulp-remember';
 import browserSync from 'browser-sync';
+import streamCombiner2 from 'stream-combiner2';
 import del from 'del';
 import path from 'path';
 import webpackStream from 'webpack-stream';
@@ -16,6 +16,7 @@ import named from 'vinyl-named';
 
 const webpack = webpackStream.webpack;
 const browserSyncer = browserSync.create();
+const combiner = streamCombiner2.obj;
 let isDevelopment = false;
 
 
@@ -39,15 +40,10 @@ gulp.task('webpack', function(callback){
 		}
 	}
 
-	return gulp.src('dev/*.js')
-		.pipe(plumber({
-			errorHandler: notify.onError(err => ({
-				title: 'webpack',
-				message: err.message
-			}))
-		}))
-		.pipe(named())
-		.pipe(webpackStream({
+	return combiner(
+		gulp.src('dev/*.js'),
+		named(),
+		webpackStream({
 			output:{
 				publicPath:'/'
 			},
@@ -57,20 +53,27 @@ gulp.task('webpack', function(callback){
 				loaders: [{
 					test: /\.js$/,
 					include: path.join(__dirname,'dev'),
-					loader: 'babel?presets[]=es2015'
+					loader: 'babel?presets[]=react,presets[]=es2015,presets[]=stage-0'
 				}]
 			},
 			plugins: [
 				new webpack.NoErrorsPlugin()
 			]
-		},null,done))
-		.pipe(gulp.dest('dist'))
-		.on('data',function(){
-			if(isDevelopment && !callback.called){
-				callback.called = true;
-				callback();
-			}
-		});
+		},null,done),
+		gulp.dest('dist'),
+	)
+	.on('data',function(){
+		if(isDevelopment && !callback.called){
+			callback.called = true;
+			callback();
+		}
+	})
+	.on('error', notify.onError(function(err) {
+		return {
+			title: 'JS',
+			message: err.message
+		}
+	}));
 });
 
 gulp.task('clean',function(){
@@ -92,7 +95,7 @@ gulp.task('watch', function(){
 })
 
 gulp.task('build', gulp.series(
-	'clean', 
+	'clean',
 	gulp.parallel('styles','assets','webpack')
 ));
 
@@ -104,7 +107,7 @@ gulp.task('server', function (){
 	browserSyncer.watch(['dist/**/*.*','index.html']).on('change',browserSyncer.reload);
 });
 
-gulp.task('dev', 
+gulp.task('dev',
 	gulp.series(
 		function(callback){isDevelopment=true;callback();},
 		'build',

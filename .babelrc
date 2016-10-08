@@ -1,6 +1,6 @@
 {
 	"presets": ["es2015","stage-0","react"],
-	"plugins": ["syntax-jsx","transform-react-jsx"],
+	"plugins": ["transform-class-properties","syntax-jsx","transform-react-jsx"],
 	"env": {
 		"production": {
 			"presets": ["babili"]
