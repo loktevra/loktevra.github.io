@@ -1,6 +1,6 @@
 import {React} from 'react';
-import {LOCAL_STORAGE_ITEM} from '../constants';
-import {getInitialColorMode} from '../getInitialColorMode';
+import {LOCAL_STORAGE_ITEM} from 'src/constants';
+import {getInitialColorMode} from 'src/getInitialColorMode';
 
 export const ThemeContext = React.createContext();
 export const ThemeProvider = ({ children }) => {

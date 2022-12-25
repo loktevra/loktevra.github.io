@@ -1,4 +1,4 @@
-import {COLOR_MODE, COLORS, MEDIA_QUERY, LOCAL_STORAGE_ITEM} from '../../constants';
+import {COLOR_MODE, COLORS, MEDIA_QUERY, LOCAL_STORAGE_ITEM} from 'src/constants';
 
 const codeToRunOnClient = `
   (function () {
