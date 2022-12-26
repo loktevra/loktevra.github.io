@@ -1,3 +1,5 @@
+// import wordsNounsA1 from './wordsNounsA1.txt';
+
 export const COLOR_MODE = {
     LIGHT: 'light',
     DARK: 'dark'
@@ -21,3 +23,5 @@ export const MEDIA_QUERY = {
 export const LOCAL_STORAGE_ITEM = {
     COLOR_MODE: 'color-mode'
 }
+
+export const WORDS_NOUNS_A1 = 'wordsNounsA1';

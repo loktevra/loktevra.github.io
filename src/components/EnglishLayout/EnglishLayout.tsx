@@ -24,6 +24,15 @@ export function EnglishLayout({ children }: LayoutProps) {
                     <ul>
                         <li><Link href='/english'>Introduction</Link></li>
                         <li><Link href='/english/words'>Words</Link></li>
+                        <li><Link href='/english/noun'>Noun</Link></li>
+                        <li><Link href='/english/numbers'>Numbers</Link></li>
+                        <li><Link href='/english/pronoun'>Pronoun</Link></li>
+                        <li><Link href='/english/verb'>Verb</Link></li>
+                        <li><Link href='/english/adverb'>Adverb</Link></li>
+                        <li><Link href='/english/adjective'>Adjective</Link></li>
+                        <li><Link href='/english/preposition'>Preposition</Link></li>
+                        <li><Link href='/english/conjuctions'>Conjunctions</Link></li>
+                        <li><Link href='/english/interjections'>Interjections</Link></li>
                     </ul>
                 </nav>
                 <main>
