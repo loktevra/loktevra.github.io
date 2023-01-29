@@ -1,12 +1,7 @@
-import type { ReactElement } from 'react'
-import Head from 'next/head'
-import Link from 'next/link'
-import {Footer} from '@components/Footer'
-import {Navbar} from '@components/Navbar'
-import styles from './ProjectsList.module.css';
+import type {Project} from './Project';
 
 type ProjectsListProps = {
-    projects: {}[]
+    projects: Project[]
 }
 
 export function ProjectsList({ projects }: ProjectsListProps) {

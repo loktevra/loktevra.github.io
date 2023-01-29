@@ -27,7 +27,7 @@ export function SpeedTyping() {
                         const curAttempt = attempts + 1
                         setAttempts(curAttempt);
                         startTime === 0 && setLastTime(Date.now());
-                        if (string[0] === value.target.value) {
+                        if (string[0] === value.currentTarget.value) {
                             setSuccess(success + 1);
                             setString(`${string.slice(1)}${items[Math.floor(Math.random()*items.length)]}`)
                             setStringPassed(`${string.slice(1)}${string[0]}`)

@@ -3,9 +3,6 @@ import path from 'path';
 import { useRouter } from 'next/router'
 import type { ReactElement } from 'react'
 import Head from 'next/head'
-import {Navbar} from '@components/Navbar'
-import {Footer} from '@components/Footer'
-import {getProjectsLayout} from '@components/ProjectsLayout';
 
 type ProjectsProps = {
     projects: {}[],
@@ -48,7 +45,7 @@ export async function getStaticPaths() {
         paths: projectsFolders.map(key => ({
             params: { key }
         })),
-        fallback: true,
+        fallback: false,
       }
 }
 

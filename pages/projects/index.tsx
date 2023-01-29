@@ -1,10 +1,11 @@
 import fs from 'fs';
 import path from 'path';
+import type {Project} from '@components/ProjectsList/Project';
 import {getProjectsLayout} from '@components/ProjectsLayout';
 import { ProjectsList } from '@components/ProjectsList';
 
 type ProjectsProps = {
-    projects: {}[],
+    projects: Project[],
 }
 
 export default function Projects({ projects }: ProjectsProps) {
