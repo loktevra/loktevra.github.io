@@ -6,6 +6,7 @@ export const Navbar = () => (
         <ul>
             <li><Link href='/'>Home</Link></li>
             <li><Link href='/english'>English grammar</Link></li>
+            <li><Link href='/projects'>Projects</Link></li>
         </ul>
         <hr />
     </nav>

@@ -1,0 +1,9 @@
+.title {
+    padding: 0 0.5rem;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 300px 600px;
+    padding: 0 0.5rem;
+}
